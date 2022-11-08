@@ -104,16 +104,16 @@ const map: Map = {
 
 export const options = {
   charSize: 8,
-  charsCount: 93
-}
+  charsCount: 93,
+};
 
 export interface IMessage {
   changeMessage: (message: string) => void;
 }
 
-export default class Message<
-  Params extends GameObjectParams
-> extends GameObject<Params> implements IMessage {
+export default class Message<Params extends GameObjectParams>
+  extends GameObject<Params>
+  implements IMessage {
   font: SpriteMapAsset;
   message: string;
 
