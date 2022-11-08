@@ -6,7 +6,6 @@ interface Map {
   [index: string]: number;
 }
 
-const charSize = 8;
 const map: Map = {
   a: 0,
   b: 1,
@@ -103,9 +102,18 @@ const map: Map = {
   '~': 92,
 };
 
+export const options = {
+  charSize: 8,
+  charsCount: 93
+}
+
+export interface IMessage {
+  changeMessage: (message: string) => void;
+}
+
 export default class Message<
   Params extends GameObjectParams
-> extends GameObject<Params> {
+> extends GameObject<Params> implements IMessage {
   font: SpriteMapAsset;
   message: string;
 
@@ -113,8 +121,8 @@ export default class Message<
     super();
 
     this.size = {
-      height: charSize,
-      width: message.length * charSize,
+      height: options.charSize,
+      width: message.length * options.charSize,
     };
 
     this.message = message;
@@ -137,15 +145,15 @@ export default class Message<
   mountMessage = () => {
     this.children = [];
     this.size = {
-      height: charSize,
-      width: this.message.length * charSize,
+      height: options.charSize,
+      width: this.message.length * options.charSize,
     };
     for (let index = 0; index < this.message.length; index++) {
       const char = this.message[index];
       const spriteIndex = this.getSpriteIndexByChar(char);
       if (spriteIndex !== undefined) {
         const sprite = this.font.data!.sprites[spriteIndex];
-        this.addChild(new Char(sprite, { x: index * charSize, y: 0 }));
+        this.addChild(new Char(sprite, { x: index * options.charSize, y: 0 }));
       }
     }
   };
