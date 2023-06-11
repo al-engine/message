@@ -1,4 +1,7 @@
-import GameObject, { GameObjectParams } from '@al-engine/game_object';
+import GameObject, {
+  GameObjectParams,
+  RenderMode,
+} from '@al-engine/game_object';
 import { SpriteMapAsset } from '@al-engine/asset';
 import { Sprite } from '@al-engine/core';
 
@@ -117,8 +120,8 @@ export default class Message<Params extends GameObjectParams>
   font: SpriteMapAsset;
   message: string;
 
-  constructor(message: string, font: SpriteMapAsset) {
-    super();
+  constructor(message: string, font: SpriteMapAsset, renderMode?: RenderMode) {
+    super(renderMode);
 
     this.size = {
       height: options.charSize,
