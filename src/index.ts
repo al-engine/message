@@ -156,7 +156,13 @@ export default class Message<Params extends GameObjectParams>
       const spriteIndex = this.getSpriteIndexByChar(char);
       if (spriteIndex !== undefined) {
         const sprite = this.font.data!.sprites[spriteIndex];
-        this.addChild(new Char(sprite, { x: index * options.charSize, y: 0 }));
+        this.addChild(
+          new Char(
+            sprite,
+            { x: index * options.charSize, y: 0 },
+            this.renderMode
+          )
+        );
       }
     }
   };
@@ -167,8 +173,12 @@ export default class Message<Params extends GameObjectParams>
 }
 
 export class Char<Params extends GameObjectParams> extends GameObject<Params> {
-  constructor(sprite: Sprite, position: { x: number; y: number }) {
-    super();
+  constructor(
+    sprite: Sprite,
+    position: { x: number; y: number },
+    renderMode?: RenderMode
+  ) {
+    super(renderMode);
     this.position = position;
     this.sprite = sprite;
   }
