@@ -156,12 +156,17 @@ export default class Message<Params extends GameObjectParams>
       const spriteIndex = this.getSpriteIndexByChar(char);
       if (spriteIndex !== undefined) {
         const sprite = this.font.data!.sprites[spriteIndex];
+        const parentOffset = { x: 0, y: 0 };
+        if (this.renderMode === RenderMode.hud) {
+          parentOffset.x = this.position.x;
+          parentOffset.y = this.position.y;
+        }
         this.addChild(
           new Char(
             sprite,
             {
-              x: this.position.x + index * options.charSize,
-              y: this.position.y,
+              x: parentOffset.x + index * options.charSize,
+              y: parentOffset.y,
             },
             this.renderMode
           )
